@@ -15,8 +15,8 @@ services:
         restart: always
   
     app:
-        container_name: 
-         demo-app
+        # container_name: 
+        #  demo-app
         depends_on:
          - mysql-docker
         build: 
