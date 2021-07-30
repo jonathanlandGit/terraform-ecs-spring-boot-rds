@@ -2,7 +2,7 @@ resource "aws_ecs_cluster" "main" {
   name = "sb-cluster"
 }
 
-data "template_file" "sb_app" {
+data "template_file" "springboot-ecs" {
   template = file("templates/ecs/production_app.json")
 
   vars = {
@@ -26,7 +26,7 @@ resource "aws_ecs_task_definition" "app" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.fargate_cpu
   memory                   = var.fargate_memory
-  container_definitions    = data.template_file.sb_app.rendered
+  container_definitions    = data.template_file.springboot-ecs.rendered
 }
 
 resource "aws_ecs_service" "main" {
