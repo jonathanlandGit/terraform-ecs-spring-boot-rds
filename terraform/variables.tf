@@ -15,7 +15,7 @@ variable "vpc_id" {
 
 variable "app_image" {
   description = "Docker image to run in the ECS cluster"
-  default     = "234877069070.dkr.ecr.us-east-1.amazonaws.com/springboot-ecs:latest"
+  default     = "https://234877069070.dkr.ecr.us-east-1.amazonaws.com/springboot-ecs:latest"
 }
 
 variable "app_port" {

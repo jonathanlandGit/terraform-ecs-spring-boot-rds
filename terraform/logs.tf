@@ -1,6 +1,6 @@
 # Set up cloudwatch group and log stream and retain logs for 30 days
 resource "aws_cloudwatch_log_group" "sb_log_group" {
-  name              = "/ecs/sb-app"
+  name              = "/ecs/springboot-ecs"
   retention_in_days = 30
 
   tags = {

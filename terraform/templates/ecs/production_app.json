@@ -1,6 +1,6 @@
 [
   {
-    "name": "sb-app",
+    "name": "springboot-ecs",
     "image": "${app_image}",
     "cpu": ${fargate_cpu
     },
@@ -10,7 +10,7 @@
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
-        "awslogs-group": "/ecs/sb-app",
+        "awslogs-group": "/ecs/springboot-ecs",
         "awslogs-region": "${aws_region}",
         "awslogs-stream-prefix": "ecs"
       }

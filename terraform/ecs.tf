@@ -19,9 +19,15 @@ data "template_file" "springboot-ecs" {
   }
 }
 
+data "aws_iam_role" "ecs_task_execution_role" {
+  name = "ecsTaskExecutionRole"
+}
+
 resource "aws_ecs_task_definition" "app" {
-  family = "sb-app-task"
+  family = "springboot-ecs-task"
   # execution_role_arn       = var.ecs_task_execution_role
+  execution_role_arn = data.aws_iam_role.ecs_task_execution_role.arn
+
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.fargate_cpu
@@ -38,13 +44,13 @@ resource "aws_ecs_service" "main" {
 
   network_configuration {
     security_groups  = ["${aws_security_group.ecs_tasks.id}"]
-    subnets          = aws_subnet.private.*.id
+    subnets          = ["subnet-34bcc152", "subnet-60641f41"]
     assign_public_ip = true
   }
 
   load_balancer {
     target_group_arn = aws_alb_target_group.app.id
-    container_name   = "sb-app"
+    container_name   = "springboot-ecs"
     container_port   = var.app_port
   }
 
